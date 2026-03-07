@@ -10,12 +10,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentReader extends AplicantReader {
+
+    protected String numeFisier;
+
+    public StudentReader(String numeFisier, String numeFisier1) {
+        super(numeFisier);
+        this.numeFisier = numeFisier1;
+    }
+
     @Override
-    public List<Aplicant> readAplicanti(String file) throws FileNotFoundException {
-        Scanner input = new Scanner(new File(file));
-
+    public List<Aplicant> readAplicanti() throws FileNotFoundException {
+        Scanner input = new Scanner(new File(super.numeFisier));
         input.useDelimiter(",|\n");
-
         List<Aplicant> studenti = new ArrayList<Aplicant>();
 
         while (input.hasNext()) {
@@ -28,10 +34,7 @@ public class StudentReader extends AplicantReader {
             s.setFacultate(facultate);
             studenti.add(s);
         }
-
         input.close();
-
         return studenti;
-
     }
 }
